@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>BMI Caculator</title>
+    <link rel="stylesheet" href="CSS/style.css">
+</head>
+<body>
+    <div class="wrap">
+        <div class="banner">
+            <div>
+                <img class="bmiLogo" src="Img/BMICLogo.png" alt="BMI Caculator">
+            </div>
+                <div class="inputBox">
+                <label>身高 cm</label>
+                <input id = "height" type="text" placeholder="請輸入身高">
+                <label>體重 kg</label>
+                <input id = "weight" type="text" placeholder="請輸入體重">
+                <button class="btn">再算一次</button>
+            </div>
+            <div class="status">
+                <p>看結果</p>
+                <p>BMI</p>
+                <div class="statusIcon">
+                </div>
+            </div>
+            <div class="statusWord">
+                <p></p>
+            </div>
+        </div>
+        <div class="content">
+            <h2>BMI 紀錄</h2>
+            <table class="record">
+            </table>
+        </div>
+        <div class="footer">
+            <div class=imgBack>
+        
+            </div>
+        </div>
+    </div>
+</body>
+<script src="JS/calculator.js"></script>
+</html>
