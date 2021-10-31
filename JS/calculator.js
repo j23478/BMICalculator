@@ -4,6 +4,7 @@ window.onload=function(){
 };
 
 let deleteBtn;
+let selectAllBtn;
 let stat = document.querySelector("div[class='status']")
 let icon = document.querySelector(".statusIcon")
 let word = document.querySelector(".statusWord")
@@ -88,10 +89,12 @@ displayLocalStorage = function(){
                 <td class="date">${currentRecord[i].recordDate}</td> \
             </tr>`
         };
-        table.innerHTML = "<th><button class='delete'>刪除選擇的紀錄</button></th>" + recordStr;
+        table.innerHTML = "<th><button class='delete'>刪除選擇的紀錄</button></th><th><button class='selectAll'>全選</button></th>"+ recordStr;
         // 確定渲染後再綁上
         deleteBtn = document.querySelector(".delete")
         deleteBtn.addEventListener("click", removeCheckedItem, false)
+        selectAllBtn = document.querySelector(".selectAll")
+        selectAllBtn.addEventListener("click", selectAll, false)
     };
 };
 
@@ -157,29 +160,29 @@ caculateBMI = function(e){
 removeCheckedItem = function(){
     let checkedItem = document.querySelectorAll("input[type='checkbox']:checked")
     let localStorageList = getLocalStorage()
+    console.log(checkedItem);
     if (checkedItem.length == 0){
         alert("請選擇要刪除的紀錄");
     }else{
-        for (i=0;i<checkedItem.length;i++){
-            let itemIndex = checkedItem[i].value;
-            // 將要刪除的value替換成 -1
-            localStorageList.splice(itemIndex, 1, -1)
-        };
-        //remove value = -1
-        let c = 0;
-        while (c < localStorageList.length){
-            console.log(c)        
-            if (localStorageList[c] == -1){
-                localStorageList.splice(c, 1);
-            }else{
-                c=c+1;   
-            };
+        let c = 0
+        // 利用有排序的特性可以直接loop
+        for(i=checkedItem.length-1;i>=0;i--){
+            let itemIndex = checkedItem[i].value - c
+            localStorageList.splice(itemIndex, 1)
+            c = c + 1;
         };
         localStorage.setItem("bmiRecord", JSON.stringify(localStorageList));
         displayLocalStorage();
     };
 };
 
+//select all
+selectAll = function(){
+    let selectAllItem = document.querySelectorAll("input[type='checkbox']")
+    for (i=0;i<selectAllItem.length;i++){
+        selectAllItem[i].checked= true;
+    };
+};
 
 
 
