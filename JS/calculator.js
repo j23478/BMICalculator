@@ -16,14 +16,19 @@ let table = document.querySelector(".record")
 
 //檢查輸入的值是合法
 parseStringtoNum = function(el){
+    let str = el.value
     //是否為空字串
-    if (el.value == ""){
+    if (str == ""){
         el.classList.add("emptyValue")
         return false;
     }else{
-        //檢查是否可轉成數字(Number)和是否大於0
-        let val = parseInt(el.value);
-        if (!isNaN(val) && val > 0){
+        //檢查是否可轉成數字(Number)
+        //是否大於0
+        //字首不能為0和
+        //不能混有文字和數字 ex 17x
+        pattern = /^[0]|[^\d]/
+        if (!pattern.test(str)){
+            let val = parseInt(el.value)
             el.classList.remove("emptyValue")    
             return val;
         }else{
